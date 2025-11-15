@@ -231,7 +231,7 @@ class BuildTest(BuildTestBase):
         # Set build reference back to default value
         set_global_setting(
             'BUILDORDER_REFERENCE_PATTERN',
-            'BO-{ref:04d}',  # noqa: RUF027
+            'BO-{ref:04d}',
             change_user=None,
         )
 
@@ -254,7 +254,7 @@ class BuildTest(BuildTestBase):
             )
 
         # Try a new validator pattern
-        set_global_setting('BUILDORDER_REFERENCE_PATTERN', '{ref}-BO', change_user=None)  # noqa: RUF027
+        set_global_setting('BUILDORDER_REFERENCE_PATTERN', '{ref}-BO', change_user=None)
 
         for ref in ['1234-BO', '9999-BO']:
             Build.objects.create(
@@ -264,7 +264,7 @@ class BuildTest(BuildTestBase):
         # Set build reference back to default value
         set_global_setting(
             'BUILDORDER_REFERENCE_PATTERN',
-            'BO-{ref:04d}',  # noqa: RUF027
+            'BO-{ref:04d}',
             change_user=None,
         )
 
