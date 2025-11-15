@@ -13,3 +13,4 @@ ty                                      # type checking
 django-types                            # typing
 django-stubs                            # typing
 requests-mock                           # Mock requests for unit tests
+invoke                                  # Task runner used by CI
