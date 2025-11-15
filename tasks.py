@@ -1987,6 +1987,7 @@ ns = Collection(
     install,
     listbackups,
     migrate,
+    test,
     plugins,
     remove_mfa,
     restore,
