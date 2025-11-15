@@ -10,6 +10,7 @@ exclude = [
     ".venv",
     ".env",
     "src/backend/plugins/*",
+    "src/backend/InvenTree/*/migrations/*",
 ]
 src = ["src/backend/InvenTree"]
 # line-length = 120
