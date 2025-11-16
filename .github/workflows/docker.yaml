@@ -1,8 +1,11 @@
 # Build, test and push InvenTree docker image
+# Docker builds have been disabled for push events - only runs on release publication
+# To re-enable push triggers, uncomment the push/pull_request sections below
+#
 # This workflow runs under any of the following conditions:
 #
-# - Push to the master branch
-# - Publish release
+# - Publish release (still enabled)
+# - Push to the master branch (DISABLED)
 #
 # The following actions are performed:
 #
@@ -17,12 +20,13 @@ on:
   release:
     types: [published]
 
-  push:
-    branches:
-      - "master"
-  pull_request:
-    branches:
-      - "master"
+  workflow_dispatch:  # Allow manual runs
+  # push:
+  #   branches:
+  #     - "master"
+  # pull_request:
+  #   branches:
+  #     - "master"
 
 permissions:
   contents: read

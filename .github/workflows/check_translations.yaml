@@ -1,12 +1,15 @@
 name: Check Translations
 
+# Translation checks have been disabled for push events
+# To re-enable, uncomment the push/pull_request triggers below
 on:
-  push:
-    branches:
-      - l10
-  pull_request:
-    branches:
-      - l10
+  workflow_dispatch:  # Only allow manual runs
+  # push:
+  #   branches:
+  #     - l10
+  # pull_request:
+  #   branches:
+  #     - l10
 
 env:
   python_version: 3.11

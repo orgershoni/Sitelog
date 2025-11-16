@@ -1,9 +1,12 @@
 name: Update Translation Files
 
+# Translation updates have been disabled for push events
+# To re-enable, uncomment the push trigger below
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:  # Only allow manual runs
+  # push:
+  #   branches:
+  #     - master
 
 env:
   python_version: 3.11

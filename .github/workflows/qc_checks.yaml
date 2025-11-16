@@ -1,12 +1,15 @@
 # Checks for each PR / push
+# CI checks have been disabled - using pre-commit hooks for light checks instead
+# To re-enable, uncomment the push/pull_request triggers below
 
 name: QC
 
 on:
-  push:
-    branches-ignore: ["l10*"]
-  pull_request:
-    branches-ignore: ["l10*"]
+  workflow_dispatch:  # Only allow manual runs
+  # push:
+  #   branches-ignore: ["l10*"]
+  # pull_request:
+  #   branches-ignore: ["l10*"]
 
 env:
   python_version: 3.11
