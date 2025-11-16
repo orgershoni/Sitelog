@@ -25,8 +25,38 @@ jobs:
   backend:
     name: Backend lint & tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: sitelog
+          POSTGRES_USER: sitelog
+          POSTGRES_PASSWORD: ${{ secrets.SITELOG_DB_PASSWORD || 'ci-password' }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U sitelog -d sitelog"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
+
+      - name: Prepare environment
+        run: |
+          mkdir -p config/static config/media config/backup
+          cp src/backend/InvenTree/config_template.yaml config/config.yaml
+          echo "INVENTREE_STATIC_ROOT=$PWD/config/static" >> $GITHUB_ENV
+          echo "INVENTREE_MEDIA_ROOT=$PWD/config/media" >> $GITHUB_ENV
+          echo "INVENTREE_BACKUP_DIR=$PWD/config/backup" >> $GITHUB_ENV
+          echo "INVENTREE_CONFIG_FILE=$PWD/config/config.yaml" >> $GITHUB_ENV
+          echo "INVENTREE_SITE_URL=http://localhost:8000" >> $GITHUB_ENV
+          echo "INVENTREE_PLUGINS_ENABLED=True" >> $GITHUB_ENV
+          echo "INVENTREE_DB_ENGINE=postgresql" >> $GITHUB_ENV
+          echo "INVENTREE_DB_HOST=127.0.0.1" >> $GITHUB_ENV
+          echo "INVENTREE_DB_PORT=5432" >> $GITHUB_ENV
+          echo "DJANGO_SETTINGS_MODULE=InvenTree.settings" >> $GITHUB_ENV
+          echo "PYTHONPATH=$PWD/src/backend" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v5
